@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Modern Material theme (no Compose) -->
+    <style name="Theme.OceanProfessional" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+        <item name="colorPrimary">@color/ocean_primary</item>
+        <item name="colorPrimaryVariant">@color/ocean_primary</item>
+        <item name="colorOnPrimary">@color/ocean_surface</item>
+
+        <item name="colorSecondary">@color/ocean_secondary</item>
+        <item name="colorSecondaryVariant">@color/ocean_secondary</item>
+        <item name="colorOnSecondary">@color/ocean_text</item>
+
+        <item name="colorError">@color/ocean_error</item>
+        <item name="colorOnError">@color/ocean_surface</item>
+
+        <item name="android:colorBackground">@color/ocean_background</item>
+        <item name="colorSurface">@color/ocean_surface</item>
+        <item name="colorOnSurface">@color/ocean_text</item>
+
+        <!-- Subtle surfaces / typography defaults -->
+        <item name="android:statusBarColor">@color/ocean_primary</item>
+        <item name="android:navigationBarColor">@color/ocean_background</item>
+    </style>
+</resources>
