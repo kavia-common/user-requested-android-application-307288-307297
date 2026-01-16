@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.coordinatorlayout.widget.CoordinatorLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/root"
@@ -29,9 +28,9 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:accessibilityLiveRegion="polite"
-            android:labelFor="@id/boardContainer"
-            android:textAppearance="@style/TextAppearance.Ocean.Status"
+            android:labelFor="@id/boardGrid"
             android:contentDescription="@string/a11y_status_label"
+            android:textAppearance="@style/TextAppearance.Ocean.Status"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
@@ -39,134 +38,115 @@
 
         <!--
           Board:
-          - Centered via constraints.
-          - Uses 3 weighted rows with 3 weighted cells each.
-          - Constrained by dimensionRatio=1:1 to stay square and scale across screens.
+          - ConstraintLayout sized square using dimensionRatio=1:1
+          - GridLayout 3x3 for equal sizing and better measurement performance (no nested weights)
         -->
-        <LinearLayout
-            android:id="@+id/boardContainer"
+        <androidx.gridlayout.widget.GridLayout
+            android:id="@+id/boardGrid"
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:layout_marginTop="16dp"
-            android:baselineAligned="false"
-            android:orientation="vertical"
+            app:alignmentMode="alignMargins"
+            app:columnCount="3"
+            app:rowCount="3"
+            app:useDefaultMargins="false"
+            android:contentDescription="@string/a11y_board_label"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintDimensionRatio="1:1"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHeight_default="wrap"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/statusText"
-            app:layout_constraintWidth_default="wrap">
+            app:layout_constraintTop_toBottomOf="@id/statusText">
 
-            <LinearLayout
-                android:id="@+id/boardRow0"
-                android:layout_width="match_parent"
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/cell0"
+                style="@style/Widget.Ocean.BoardCell"
+                android:layout_width="0dp"
                 android:layout_height="0dp"
-                android:layout_weight="1"
-                android:baselineAligned="false"
-                android:orientation="horizontal">
+                android:layout_margin="6dp"
+                app:layout_columnWeight="1"
+                app:layout_rowWeight="1"
+                tools:text="X" />
 
-                <com.google.android.material.button.MaterialButton
-                    android:id="@+id/cell0"
-                    style="@style/Widget.Ocean.BoardCell"
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_margin="6dp"
-                    android:layout_weight="1"
-                    android:contentDescription="@string/a11y_cell_empty" />
-
-                <com.google.android.material.button.MaterialButton
-                    android:id="@+id/cell1"
-                    style="@style/Widget.Ocean.BoardCell"
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_margin="6dp"
-                    android:layout_weight="1"
-                    android:contentDescription="@string/a11y_cell_empty" />
-
-                <com.google.android.material.button.MaterialButton
-                    android:id="@+id/cell2"
-                    style="@style/Widget.Ocean.BoardCell"
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_margin="6dp"
-                    android:layout_weight="1"
-                    android:contentDescription="@string/a11y_cell_empty" />
-            </LinearLayout>
-
-            <LinearLayout
-                android:id="@+id/boardRow1"
-                android:layout_width="match_parent"
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/cell1"
+                style="@style/Widget.Ocean.BoardCell"
+                android:layout_width="0dp"
                 android:layout_height="0dp"
-                android:layout_weight="1"
-                android:baselineAligned="false"
-                android:orientation="horizontal">
+                android:layout_margin="6dp"
+                app:layout_columnWeight="1"
+                app:layout_rowWeight="1"
+                tools:text="" />
 
-                <com.google.android.material.button.MaterialButton
-                    android:id="@+id/cell3"
-                    style="@style/Widget.Ocean.BoardCell"
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_margin="6dp"
-                    android:layout_weight="1"
-                    android:contentDescription="@string/a11y_cell_empty" />
-
-                <com.google.android.material.button.MaterialButton
-                    android:id="@+id/cell4"
-                    style="@style/Widget.Ocean.BoardCell"
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_margin="6dp"
-                    android:layout_weight="1"
-                    android:contentDescription="@string/a11y_cell_empty" />
-
-                <com.google.android.material.button.MaterialButton
-                    android:id="@+id/cell5"
-                    style="@style/Widget.Ocean.BoardCell"
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_margin="6dp"
-                    android:layout_weight="1"
-                    android:contentDescription="@string/a11y_cell_empty" />
-            </LinearLayout>
-
-            <LinearLayout
-                android:id="@+id/boardRow2"
-                android:layout_width="match_parent"
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/cell2"
+                style="@style/Widget.Ocean.BoardCell"
+                android:layout_width="0dp"
                 android:layout_height="0dp"
-                android:layout_weight="1"
-                android:baselineAligned="false"
-                android:orientation="horizontal">
+                android:layout_margin="6dp"
+                app:layout_columnWeight="1"
+                app:layout_rowWeight="1"
+                tools:text="O" />
 
-                <com.google.android.material.button.MaterialButton
-                    android:id="@+id/cell6"
-                    style="@style/Widget.Ocean.BoardCell"
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_margin="6dp"
-                    android:layout_weight="1"
-                    android:contentDescription="@string/a11y_cell_empty" />
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/cell3"
+                style="@style/Widget.Ocean.BoardCell"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_margin="6dp"
+                app:layout_columnWeight="1"
+                app:layout_rowWeight="1"
+                tools:text="" />
 
-                <com.google.android.material.button.MaterialButton
-                    android:id="@+id/cell7"
-                    style="@style/Widget.Ocean.BoardCell"
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_margin="6dp"
-                    android:layout_weight="1"
-                    android:contentDescription="@string/a11y_cell_empty" />
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/cell4"
+                style="@style/Widget.Ocean.BoardCell"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_margin="6dp"
+                app:layout_columnWeight="1"
+                app:layout_rowWeight="1"
+                tools:text="X" />
 
-                <com.google.android.material.button.MaterialButton
-                    android:id="@+id/cell8"
-                    style="@style/Widget.Ocean.BoardCell"
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_margin="6dp"
-                    android:layout_weight="1"
-                    android:contentDescription="@string/a11y_cell_empty" />
-            </LinearLayout>
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/cell5"
+                style="@style/Widget.Ocean.BoardCell"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_margin="6dp"
+                app:layout_columnWeight="1"
+                app:layout_rowWeight="1"
+                tools:text="" />
 
-        </LinearLayout>
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/cell6"
+                style="@style/Widget.Ocean.BoardCell"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_margin="6dp"
+                app:layout_columnWeight="1"
+                app:layout_rowWeight="1"
+                tools:text="O" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/cell7"
+                style="@style/Widget.Ocean.BoardCell"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_margin="6dp"
+                app:layout_columnWeight="1"
+                app:layout_rowWeight="1"
+                tools:text="" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/cell8"
+                style="@style/Widget.Ocean.BoardCell"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_margin="6dp"
+                app:layout_columnWeight="1"
+                app:layout_rowWeight="1"
+                tools:text="X" />
+        </androidx.gridlayout.widget.GridLayout>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

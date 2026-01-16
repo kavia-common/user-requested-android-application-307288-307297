@@ -26,7 +26,7 @@
     </style>
 
     <!-- Typography -->
-    <style name="TextAppearance.Ocean.Status" parent="TextAppearance.MaterialComponents.Body1">
+    <style name="TextAppearance.Ocean.Status" parent="TextAppearance.MaterialComponents.Headline6">
         <item name="android:textColor">@color/ocean_text</item>
         <item name="android:textStyle">bold</item>
         <item name="android:fontFamily">sans-serif-medium</item>
@@ -38,13 +38,12 @@
         <item name="android:textColor">@color/ocean_text</item>
         <item name="android:textStyle">bold</item>
         <item name="android:fontFamily">sans-serif</item>
-        <!-- Use sp for scaling; actual size is still settable per view if needed -->
-        <item name="android:textSize">34sp</item>
+        <item name="android:textSize">36sp</item>
     </style>
 
     <!-- Board cell button -->
     <style name="Widget.Ocean.BoardCell" parent="Widget.MaterialComponents.Button.OutlinedButton">
-        <!-- Touch target: ensure >= 48dp. Board uses match_parent height per row, but min ensures small screens -->
+        <!-- Touch target: >= 48dp -->
         <item name="android:minHeight">56dp</item>
         <item name="android:minWidth">56dp</item>
 
@@ -59,16 +58,13 @@
         <item name="android:paddingTop">0dp</item>
         <item name="android:paddingBottom">0dp</item>
 
-        <!-- Use our rounded shape; do not set extra view backgrounds elsewhere -->
-        <item name="android:background">@drawable/bg_cell</item>
+        <!-- Use our stateful background (focus + ripple) -->
+        <item name="android:background">@drawable/bg_cell_stateful</item>
 
         <!-- Default text appearance for cells -->
         <item name="android:textAppearance">@style/TextAppearance.Ocean.Cell</item>
 
-        <!-- Ripple -->
-        <item name="rippleColor">@color/ocean_pressed_overlay</item>
-
-        <!-- Disabled state should remain readable -->
+        <!-- Ensure symbols remain high-contrast -->
         <item name="android:textColor">@color/ocean_text</item>
     </style>
 </resources>

@@ -14,7 +14,11 @@
     <color name="ocean_win_highlight">#DBEAFE</color> <!-- subtle blue highlight -->
 
     <!-- State/Accessibility helpers -->
-    <color name="ocean_disabled_bg">#F3F4F6</color> <!-- gray-100 -->
     <color name="ocean_disabled_text">#6B7280</color> <!-- gray-500 -->
-    <color name="ocean_pressed_overlay">#1D4ED8</color> <!-- blue-700 for ripple/pressed -->
+
+    <!-- Focus ring should be very visible on light surfaces -->
+    <color name="ocean_focus">#1D4ED8</color> <!-- blue-700 -->
+
+    <!-- Ripple overlay: slightly softer than focus ring but still visible -->
+    <color name="ocean_ripple">#332563EB</color> <!-- primary @ ~20% alpha -->
 </resources>

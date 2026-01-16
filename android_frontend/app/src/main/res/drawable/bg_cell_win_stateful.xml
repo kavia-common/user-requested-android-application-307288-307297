@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ripple xmlns:android="http://schemas.android.com/apk/res/android"
+    android:color="@color/ocean_ripple">
+
+    <item android:id="@android:id/mask">
+        <shape>
+            <solid android:color="@android:color/white" />
+            <corners android:radius="14dp" />
+        </shape>
+    </item>
+
+    <item>
+        <selector>
+            <!-- Focused win cell: keep win fill, add a stronger focus stroke -->
+            <item android:state_focused="true">
+                <shape>
+                    <solid android:color="@color/ocean_win_highlight" />
+                    <stroke
+                        android:width="3dp"
+                        android:color="@color/ocean_focus" />
+                    <corners android:radius="14dp" />
+                </shape>
+            </item>
+
+            <!-- Default win cell -->
+            <item>
+                <shape>
+                    <solid android:color="@color/ocean_win_highlight" />
+                    <stroke
+                        android:width="2dp"
+                        android:color="@color/ocean_primary" />
+                    <corners android:radius="14dp" />
+                </shape>
+            </item>
+        </selector>
+    </item>
+</ripple>

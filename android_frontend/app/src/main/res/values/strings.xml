@@ -14,6 +14,7 @@
     <!-- Accessibility -->
     <string name="a11y_status_label">Game status</string>
     <string name="a11y_reset_game">Reset game</string>
+    <string name="a11y_board_label">Game board</string>
 
     <!-- Cell content description -->
     <string name="a11y_cell_empty">Cell %1$d, empty</string>
