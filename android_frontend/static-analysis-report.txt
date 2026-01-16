@@ -1,0 +1,41 @@
+Static Analysis Summary (android_frontend)
+
+Commands run:
+- CI=true sh ./gradlew lint --warning-mode all --stacktrace
+- sh ./gradlew detekt (task not found)
+- sh ./gradlew ktlintCheck (task not found)
+
+Android Lint:
+- Total: 6 warnings, 0 errors
+- Reports:
+  - app/build/reports/lint-results-debug.html
+
+Warnings:
+1) IntentFilterExportedReceiver (Security) WARNING
+   - app/src/main/AndroidManifest.xml:6
+   - As of Android 12, android:exported must be set for components with intent-filters.
+
+2) Overdraw (Performance) WARNING
+   - app/src/main/res/layout/activity_main.xml:9
+   - Root background may be redundant with theme background.
+
+3) UnusedResources (Performance) WARNING x3
+   - app/src/main/res/values/strings.xml:
+     - status_turn (line 10)
+     - player_x (line 11)
+     - player_o (line 12)
+
+4) MissingApplicationIcon (Usability:Icons) WARNING
+   - app/src/main/AndroidManifest.xml:3
+   - android:icon not explicitly set on <application>.
+
+Detekt:
+- Not configured (no Gradle task).
+
+ktlint:
+- Not configured (no Gradle task).
+
+Gradle warnings:
+- Deprecation warnings about "Retrieving attribute with a null key" (will fail in Gradle 10).
+- Problems report path:
+  - build/reports/problems/problems-report.html
