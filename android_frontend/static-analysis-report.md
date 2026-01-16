@@ -1,12 +1,12 @@
 # Static Analysis Report (android_frontend)
 
 Date: 2026-01-16  
-Tooling: Android Lint via Gradle (`:app:lintDebug`) + Gradle Problems Report review
+Tooling: Android Lint via Gradle (`:app:lintDebug`) + Gradle deprecation warnings (`--warning-mode all`) + Gradle Problems Report review
 
 ## Commands executed
 
-- `sh ./gradlew :app:lintDebug`
-- `sh ./gradlew --warning-mode all :app:lintDebug`
+- `sh ./gradlew :app:lintDebug --no-daemon`
+- `sh ./gradlew --warning-mode all :app:lintDebug --no-daemon`
 
 Reports reviewed:
 
@@ -16,67 +16,71 @@ Reports reviewed:
 ## Summary (latest run)
 
 - **Errors:** 0
-- **Warnings (Android Lint):** 15
-- **Warnings (Gradle problems/deprecations):** 3
+- **Warnings (Android Lint):** 6
+- **Warnings (Gradle deprecations / Problems Report):** 3
 
-## Delta vs prior report (when available)
+## Delta vs prior report
 
-Previously reported **5** Android Lint warnings; now **15**.
+Previously reported **15** Android Lint warnings; now **6**.
 
-**New warnings introduced (10):**
-- **NestedWeights** (3 occurrences) in `activity_main.xml`
-- **HardcodedText** (9 occurrences) in `activity_main.xml` (cell content descriptions)
+**Resolved since prior report:**
+- **HardcodedText** warnings in `activity_main.xml` (cell contentDescription strings) — no longer reported.
+- **Overdraw** warning in `activity_main.xml` — no longer reported.
 
-**No longer present:**
-- `UnusedResources` warnings for `@string/player_x` and `@string/player_o` (these are now referenced in `TicTacToeState.statusText()`)
+**New / still present:**
+- **NestedWeights** (3 occurrences) in `activity_main.xml` (still present).
+- **UnusedResources** (1): `@color/ocean_disabled_bg` in `colors.xml` (new in this run).
+- **IntentFilterExportedReceiver** (1) in `AndroidManifest.xml` (still present).
+- **MissingApplicationIcon** (1) in `AndroidManifest.xml` (still present).
 
-## Android Lint Warnings (15)
+## Android Lint Warnings (6)
 
-### 1) Android 12 exported requirement
+Source: `app/build/reports/lint-results-debug.txt`
+
+### 1) Android 12 exported requirement (launcher activity)
 - **Severity:** Warning
 - **Issue:** `IntentFilterExportedReceiver`
 - **File:** `app/src/main/AndroidManifest.xml:6`
+- **Details:** As of Android 12, `android:exported` must be set when an `intent-filter` is present.
 - **Suggested fix:** Add `android:exported="true"` to the launcher activity (`.MainActivity`).
 
-### 2) Overdraw (performance)
+### 2) Nested weights (performance) — 3 warnings
 - **Severity:** Warning
-- **Issue:** `Overdraw`
-- **File:** `app/src/main/res/layout/activity_main.xml:9`
-- **Suggested fix:** Remove root background or move background into the theme (or use a theme with null window background) to avoid drawing background twice.
+- **Issue:** `NestedWeights`
+- **File/lines (per lint):**
+  - `app/src/main/res/layout/activity_main.xml:75`
+  - `app/src/main/res/layout/activity_main.xml:111`
+  - `app/src/main/res/layout/activity_main.xml:147`
+- **Why it matters:** LinearLayout weights trigger extra measurement passes; nested weights can multiply measurement work.
+- **Suggested fix:** Consider `ConstraintLayout` or `GridLayout` for the 3x3 board (or remove nested weights).
 
-### 3) Missing application icon
+### 3) Unused resource — 1 warning
+- **Severity:** Warning
+- **Issue:** `UnusedResources`
+- **File:** `app/src/main/res/values/colors.xml:17`
+- **Resource:** `@color/ocean_disabled_bg`
+- **Suggested fix:** Remove the color if unused, or reference it (e.g., in styles/backgrounds) if intended.
+
+### 4) Missing application icon — 1 warning
 - **Severity:** Warning
 - **Issue:** `MissingApplicationIcon`
 - **File:** `app/src/main/AndroidManifest.xml:3`
-- **Suggested fix:** Set `android:icon="@mipmap/ic_launcher"` (and add corresponding resources), or another drawable/mipmap.
+- **Suggested fix:** Set `android:icon="@mipmap/ic_launcher"` (and add the corresponding resource), or another drawable/mipmap.
 
-### 4) Nested weights (performance) — 3 warnings
-- **Severity:** Warning
-- **Issue:** `NestedWeights`
-- **Files/lines:**
-  - `app/src/main/res/layout/activity_main.xml:76`
-  - `app/src/main/res/layout/activity_main.xml:139`
-  - `app/src/main/res/layout/activity_main.xml:202`
-- **Why it matters:** LinearLayout weights cause additional measure passes; nested weighted LinearLayouts can cause a large performance hit.
-- **Suggested fix:** Consider using `ConstraintLayout` for the board grid, `GridLayout`, or avoid nested weights.
+## Gradle deprecations / Problems Report (3 warnings)
 
-### 5) Hardcoded contentDescription strings — 9 warnings
-- **Severity:** Warning
-- **Issue:** `HardcodedText`
-- **Files/lines:** `app/src/main/res/layout/activity_main.xml` lines 78, 96, 114, 141, 159, 177, 204, 222, 240
-- **Suggested fix:** Move “Cell 1”…”Cell 9” into `strings.xml` resources (or use a single formatted string like “Cell %1$d”).
+These warnings were printed with `--warning-mode all` and also reflected by the Problems Report generation.
 
-## Gradle Problems Report (latest: 3 warnings)
-
-All 3 are **Deprecation** warnings associated with the Android/Gradle tooling (plugin `com.android.internal.application`), not directly app code:
+All 3 are **Deprecation** warnings associated with the Android/Gradle tooling (not directly app source):
 
 1) Declaring `crunchPngs` as an `is-` boolean property is deprecated (Gradle 10 behavior change)
 2) Declaring `useProguard` as an `is-` boolean property is deprecated (Gradle 10 behavior change)
 3) Declaring `wearAppUnbundled` as an `is-` boolean property is deprecated (Gradle 10 behavior change)
 
-**Suggested fix:** Upgrade/adjust Android Gradle Plugin / related tooling when feasible; these are not typically fixable in app source.
+**Suggested fix:** Update/adjust Android Gradle Plugin / related tooling when feasible; these are generally not fixable purely in app code.
 
 ## Notes
 
-- Build and lint run succeeded (`0 errors`).
-- This report intentionally summarizes warnings; full details are in the generated lint/proble report files listed above.
+- Lint and build completed successfully (`BUILD SUCCESSFUL`).
+- `chmod +x ./gradlew` is not permitted in this environment; all Gradle commands were executed via `sh ./gradlew ...`.
+- Full details are in the generated Lint and Problems Report artifacts referenced above.
