@@ -10,4 +10,19 @@
     <string name="result_x_wins">X wins!</string>
     <string name="result_o_wins">O wins!</string>
     <string name="result_draw">It\'s a draw!</string>
+
+    <!-- Accessibility -->
+    <string name="a11y_status_label">Game status</string>
+    <string name="a11y_reset_game">Reset game</string>
+
+    <!-- Cell content description -->
+    <string name="a11y_cell_empty">Cell %1$d, empty</string>
+    <string name="a11y_cell_x">Cell %1$d, X</string>
+    <string name="a11y_cell_o">Cell %1$d, O</string>
+
+    <!-- Announcements for live region -->
+    <string name="a11y_announce_turn">Turn: %1$s</string>
+    <string name="a11y_announce_x_wins">X wins</string>
+    <string name="a11y_announce_o_wins">O wins</string>
+    <string name="a11y_announce_draw">Draw</string>
 </resources>

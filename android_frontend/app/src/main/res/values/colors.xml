@@ -12,4 +12,9 @@
     <!-- Utility -->
     <color name="ocean_outline">#E5E7EB</color>
     <color name="ocean_win_highlight">#DBEAFE</color> <!-- subtle blue highlight -->
+
+    <!-- State/Accessibility helpers -->
+    <color name="ocean_disabled_bg">#F3F4F6</color> <!-- gray-100 -->
+    <color name="ocean_disabled_text">#6B7280</color> <!-- gray-500 -->
+    <color name="ocean_pressed_overlay">#1D4ED8</color> <!-- blue-700 for ripple/pressed -->
 </resources>

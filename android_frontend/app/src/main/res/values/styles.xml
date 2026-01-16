@@ -17,8 +17,58 @@
         <item name="colorSurface">@color/ocean_surface</item>
         <item name="colorOnSurface">@color/ocean_text</item>
 
-        <!-- Subtle surfaces / typography defaults -->
+        <!-- Subtle surfaces / system bars -->
         <item name="android:statusBarColor">@color/ocean_primary</item>
         <item name="android:navigationBarColor">@color/ocean_background</item>
+
+        <!-- Prefer theme-driven window background to reduce overdraw; layout root should avoid extra bg -->
+        <item name="android:windowBackground">@color/ocean_background</item>
+    </style>
+
+    <!-- Typography -->
+    <style name="TextAppearance.Ocean.Status" parent="TextAppearance.MaterialComponents.Body1">
+        <item name="android:textColor">@color/ocean_text</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:fontFamily">sans-serif-medium</item>
+        <item name="android:textSize">18sp</item>
+        <item name="lineHeight">24sp</item>
+    </style>
+
+    <style name="TextAppearance.Ocean.Cell" parent="TextAppearance.MaterialComponents.Headline4">
+        <item name="android:textColor">@color/ocean_text</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:fontFamily">sans-serif</item>
+        <!-- Use sp for scaling; actual size is still settable per view if needed -->
+        <item name="android:textSize">34sp</item>
+    </style>
+
+    <!-- Board cell button -->
+    <style name="Widget.Ocean.BoardCell" parent="Widget.MaterialComponents.Button.OutlinedButton">
+        <!-- Touch target: ensure >= 48dp. Board uses match_parent height per row, but min ensures small screens -->
+        <item name="android:minHeight">56dp</item>
+        <item name="android:minWidth">56dp</item>
+
+        <!-- Remove Material's internal insets so the shape + size behaves predictably -->
+        <item name="android:insetLeft">0dp</item>
+        <item name="android:insetRight">0dp</item>
+        <item name="android:insetTop">0dp</item>
+        <item name="android:insetBottom">0dp</item>
+
+        <item name="android:paddingLeft">0dp</item>
+        <item name="android:paddingRight">0dp</item>
+        <item name="android:paddingTop">0dp</item>
+        <item name="android:paddingBottom">0dp</item>
+
+        <!-- Use our rounded shape; do not set extra view backgrounds elsewhere -->
+        <item name="android:background">@drawable/bg_cell</item>
+
+        <!-- Default text appearance for cells -->
+        <item name="android:textAppearance">@style/TextAppearance.Ocean.Cell</item>
+
+        <!-- Ripple -->
+        <item name="rippleColor">@color/ocean_pressed_overlay</item>
+
+        <!-- Disabled state should remain readable -->
+        <item name="android:textColor">@color/ocean_text</item>
     </style>
 </resources>

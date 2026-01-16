@@ -6,7 +6,6 @@
     android:id="@+id/root"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/ocean_background"
     tools:context=".MainActivity">
 
     <com.google.android.material.appbar.MaterialToolbar
@@ -29,10 +28,10 @@
             android:id="@+id/statusText"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:fontFamily="sans-serif-medium"
-            android:textColor="@color/ocean_text"
-            android:textSize="16sp"
-            android:textStyle="bold"
+            android:accessibilityLiveRegion="polite"
+            android:labelFor="@id/boardContainer"
+            android:textAppearance="@style/TextAppearance.Ocean.Status"
+            android:contentDescription="@string/a11y_status_label"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
@@ -69,57 +68,30 @@
 
                 <com.google.android.material.button.MaterialButton
                     android:id="@+id/cell0"
-                    style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+                    style="@style/Widget.Ocean.BoardCell"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_margin="6dp"
                     android:layout_weight="1"
-                    android:background="@drawable/bg_cell"
-                    android:contentDescription="Cell 1"
-                    android:insetLeft="0dp"
-                    android:insetRight="0dp"
-                    android:insetTop="0dp"
-                    android:insetBottom="0dp"
-                    android:minHeight="64dp"
-                    android:textColor="@color/ocean_text"
-                    android:textSize="32sp"
-                    app:rippleColor="@color/ocean_primary" />
+                    android:contentDescription="@string/a11y_cell_empty" />
 
                 <com.google.android.material.button.MaterialButton
                     android:id="@+id/cell1"
-                    style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+                    style="@style/Widget.Ocean.BoardCell"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_margin="6dp"
                     android:layout_weight="1"
-                    android:background="@drawable/bg_cell"
-                    android:contentDescription="Cell 2"
-                    android:insetLeft="0dp"
-                    android:insetRight="0dp"
-                    android:insetTop="0dp"
-                    android:insetBottom="0dp"
-                    android:minHeight="64dp"
-                    android:textColor="@color/ocean_text"
-                    android:textSize="32sp"
-                    app:rippleColor="@color/ocean_primary" />
+                    android:contentDescription="@string/a11y_cell_empty" />
 
                 <com.google.android.material.button.MaterialButton
                     android:id="@+id/cell2"
-                    style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+                    style="@style/Widget.Ocean.BoardCell"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_margin="6dp"
                     android:layout_weight="1"
-                    android:background="@drawable/bg_cell"
-                    android:contentDescription="Cell 3"
-                    android:insetLeft="0dp"
-                    android:insetRight="0dp"
-                    android:insetTop="0dp"
-                    android:insetBottom="0dp"
-                    android:minHeight="64dp"
-                    android:textColor="@color/ocean_text"
-                    android:textSize="32sp"
-                    app:rippleColor="@color/ocean_primary" />
+                    android:contentDescription="@string/a11y_cell_empty" />
             </LinearLayout>
 
             <LinearLayout
@@ -132,57 +104,30 @@
 
                 <com.google.android.material.button.MaterialButton
                     android:id="@+id/cell3"
-                    style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+                    style="@style/Widget.Ocean.BoardCell"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_margin="6dp"
                     android:layout_weight="1"
-                    android:background="@drawable/bg_cell"
-                    android:contentDescription="Cell 4"
-                    android:insetLeft="0dp"
-                    android:insetRight="0dp"
-                    android:insetTop="0dp"
-                    android:insetBottom="0dp"
-                    android:minHeight="64dp"
-                    android:textColor="@color/ocean_text"
-                    android:textSize="32sp"
-                    app:rippleColor="@color/ocean_primary" />
+                    android:contentDescription="@string/a11y_cell_empty" />
 
                 <com.google.android.material.button.MaterialButton
                     android:id="@+id/cell4"
-                    style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+                    style="@style/Widget.Ocean.BoardCell"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_margin="6dp"
                     android:layout_weight="1"
-                    android:background="@drawable/bg_cell"
-                    android:contentDescription="Cell 5"
-                    android:insetLeft="0dp"
-                    android:insetRight="0dp"
-                    android:insetTop="0dp"
-                    android:insetBottom="0dp"
-                    android:minHeight="64dp"
-                    android:textColor="@color/ocean_text"
-                    android:textSize="32sp"
-                    app:rippleColor="@color/ocean_primary" />
+                    android:contentDescription="@string/a11y_cell_empty" />
 
                 <com.google.android.material.button.MaterialButton
                     android:id="@+id/cell5"
-                    style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+                    style="@style/Widget.Ocean.BoardCell"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_margin="6dp"
                     android:layout_weight="1"
-                    android:background="@drawable/bg_cell"
-                    android:contentDescription="Cell 6"
-                    android:insetLeft="0dp"
-                    android:insetRight="0dp"
-                    android:insetTop="0dp"
-                    android:insetBottom="0dp"
-                    android:minHeight="64dp"
-                    android:textColor="@color/ocean_text"
-                    android:textSize="32sp"
-                    app:rippleColor="@color/ocean_primary" />
+                    android:contentDescription="@string/a11y_cell_empty" />
             </LinearLayout>
 
             <LinearLayout
@@ -195,57 +140,30 @@
 
                 <com.google.android.material.button.MaterialButton
                     android:id="@+id/cell6"
-                    style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+                    style="@style/Widget.Ocean.BoardCell"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_margin="6dp"
                     android:layout_weight="1"
-                    android:background="@drawable/bg_cell"
-                    android:contentDescription="Cell 7"
-                    android:insetLeft="0dp"
-                    android:insetRight="0dp"
-                    android:insetTop="0dp"
-                    android:insetBottom="0dp"
-                    android:minHeight="64dp"
-                    android:textColor="@color/ocean_text"
-                    android:textSize="32sp"
-                    app:rippleColor="@color/ocean_primary" />
+                    android:contentDescription="@string/a11y_cell_empty" />
 
                 <com.google.android.material.button.MaterialButton
                     android:id="@+id/cell7"
-                    style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+                    style="@style/Widget.Ocean.BoardCell"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_margin="6dp"
                     android:layout_weight="1"
-                    android:background="@drawable/bg_cell"
-                    android:contentDescription="Cell 8"
-                    android:insetLeft="0dp"
-                    android:insetRight="0dp"
-                    android:insetTop="0dp"
-                    android:insetBottom="0dp"
-                    android:minHeight="64dp"
-                    android:textColor="@color/ocean_text"
-                    android:textSize="32sp"
-                    app:rippleColor="@color/ocean_primary" />
+                    android:contentDescription="@string/a11y_cell_empty" />
 
                 <com.google.android.material.button.MaterialButton
                     android:id="@+id/cell8"
-                    style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+                    style="@style/Widget.Ocean.BoardCell"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_margin="6dp"
                     android:layout_weight="1"
-                    android:background="@drawable/bg_cell"
-                    android:contentDescription="Cell 9"
-                    android:insetLeft="0dp"
-                    android:insetRight="0dp"
-                    android:insetTop="0dp"
-                    android:insetBottom="0dp"
-                    android:minHeight="64dp"
-                    android:textColor="@color/ocean_text"
-                    android:textSize="32sp"
-                    app:rippleColor="@color/ocean_primary" />
+                    android:contentDescription="@string/a11y_cell_empty" />
             </LinearLayout>
 
         </LinearLayout>
@@ -257,7 +175,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_margin="20dp"
-        android:contentDescription="@string/action_reset"
+        android:contentDescription="@string/a11y_reset_game"
         app:backgroundTint="@color/ocean_secondary"
         app:layout_anchor="@id/content"
         app:layout_anchorGravity="bottom|end"
