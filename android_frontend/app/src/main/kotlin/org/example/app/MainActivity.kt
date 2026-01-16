@@ -45,6 +45,9 @@ class MainActivity : Activity() {
         for (i in cells.indices) {
             val btn = cells[i]
             btn.setOnClickListener { view ->
+                // If game is over or cell is not valid, ignore taps (also UI disables, but this is extra safety).
+                if (gameState.gameOver) return@setOnClickListener
+
                 // Small press animation (simple scale) for smooth feedback without extra deps.
                 view.animate().scaleX(0.96f).scaleY(0.96f).setDuration(60).withEndAction {
                     view.animate().scaleX(1f).scaleY(1f).setDuration(90).start()
@@ -77,7 +80,8 @@ class MainActivity : Activity() {
     }
 
     private fun render() {
-        statusText.text = getString(R.string.status_turn, gameState.currentTurn.toString())
+        // Reflect game state in status text: turn vs win/draw.
+        statusText.text = gameState.statusText()
 
         val winLine = gameState.winLine?.toSet()
 
