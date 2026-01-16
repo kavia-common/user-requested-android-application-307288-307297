@@ -81,7 +81,7 @@ class MainActivity : Activity() {
 
     private fun render() {
         // Reflect game state in status text: turn vs win/draw.
-        statusText.text = gameState.statusText()
+        statusText.text = gameState.statusText(this)
 
         val winLine = gameState.winLine?.toSet()
 

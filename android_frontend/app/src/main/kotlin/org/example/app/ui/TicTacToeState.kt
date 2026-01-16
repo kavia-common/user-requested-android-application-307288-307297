@@ -1,6 +1,8 @@
 package org.example.app.ui
 
+import android.content.Context
 import android.os.Bundle
+import org.example.app.R
 import org.example.app.game.TicTacToeGame
 
 /**
@@ -74,13 +76,21 @@ internal class TicTacToeState {
     }
 
     // PUBLIC_INTERFACE
-    fun statusText(): String {
-        /** Returns a simple status string for the UI (e.g., "X's turn", "O wins!", "Draw"). */
+    fun statusText(context: Context): String {
+        /** Returns a localized status string for the UI (e.g., "Turn: X", "X wins!", "It's a draw!"). */
         return when (status) {
-            GameStatus.InProgress -> "${currentTurn}'s turn"
-            GameStatus.XWins -> "X wins!"
-            GameStatus.OWins -> "O wins!"
-            GameStatus.Draw -> "Draw"
+            GameStatus.InProgress -> {
+                val turn = if (currentTurn == TicTacToeGame.O) {
+                    context.getString(R.string.player_o)
+                } else {
+                    context.getString(R.string.player_x)
+                }
+                context.getString(R.string.status_turn, turn)
+            }
+
+            GameStatus.XWins -> context.getString(R.string.result_x_wins)
+            GameStatus.OWins -> context.getString(R.string.result_o_wins)
+            GameStatus.Draw -> context.getString(R.string.result_draw)
         }
     }
 
