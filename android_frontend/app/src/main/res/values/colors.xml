@@ -9,6 +9,10 @@
     <color name="ocean_surface">#FFFFFF</color>
     <color name="ocean_text">#111827</color>
 
+    <!-- Accents for marks -->
+    <color name="ocean_x_accent">#2563EB</color>
+    <color name="ocean_o_accent">#F59E0B</color>
+
     <!-- Utility -->
     <color name="ocean_outline">#E5E7EB</color>
     <color name="ocean_win_highlight">#DBEAFE</color> <!-- subtle blue highlight -->

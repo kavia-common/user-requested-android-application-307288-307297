@@ -17,8 +17,83 @@
         <item name="colorSurface">@color/ocean_surface</item>
         <item name="colorOnSurface">@color/ocean_text</item>
 
-        <!-- Subtle surfaces / typography defaults -->
+        <!-- Subtle surfaces / system UI -->
         <item name="android:statusBarColor">@color/ocean_primary</item>
         <item name="android:navigationBarColor">@color/ocean_background</item>
+
+        <!-- Default typography -->
+        <item name="textAppearanceHeadline6">@style/TextAppearance.Ocean.ToolbarTitle</item>
+    </style>
+
+    <style name="Widget.Ocean.Toolbar" parent="Widget.MaterialComponents.Toolbar">
+        <item name="android:background">@color/ocean_surface</item>
+        <item name="titleTextColor">@color/ocean_text</item>
+        <item name="android:elevation">2dp</item>
+    </style>
+
+    <style name="TextAppearance.Ocean.ToolbarTitle" parent="TextAppearance.MaterialComponents.Headline6">
+        <item name="android:textColor">@color/ocean_text</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <style name="TextAppearance.Ocean.Title" parent="TextAppearance.MaterialComponents.Subtitle1">
+        <item name="android:textColor">@color/ocean_text</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:fontFamily">sans-serif-medium</item>
+    </style>
+
+    <style name="TextAppearance.Ocean.Score" parent="TextAppearance.MaterialComponents.Body2">
+        <item name="android:textColor">@color/ocean_text</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <style name="Widget.Ocean.ScoreCard" parent="Widget.MaterialComponents.CardView">
+        <item name="cardCornerRadius">16dp</item>
+        <item name="cardElevation">2dp</item>
+        <item name="strokeColor">@color/ocean_outline</item>
+        <item name="strokeWidth">1dp</item>
+        <item name="android:backgroundTint">@color/ocean_surface</item>
+    </style>
+
+    <style name="Widget.Ocean.BoardCard" parent="Widget.MaterialComponents.CardView">
+        <item name="cardCornerRadius">20dp</item>
+        <item name="cardElevation">3dp</item>
+        <item name="strokeColor">@color/ocean_outline</item>
+        <item name="strokeWidth">1dp</item>
+        <item name="android:backgroundTint">@color/ocean_surface</item>
+    </style>
+
+    <style name="Widget.Ocean.CellButton" parent="Widget.MaterialComponents.Button.OutlinedButton">
+        <!-- Ensure touch target sizes & consistent square buttons -->
+        <item name="android:minHeight">72dp</item>
+        <item name="android:minWidth">72dp</item>
+
+        <!-- Visuals -->
+        <item name="android:background">@drawable/bg_cell</item>
+        <item name="android:insetLeft">0dp</item>
+        <item name="android:insetRight">0dp</item>
+        <item name="android:insetTop">0dp</item>
+        <item name="android:insetBottom">0dp</item>
+
+        <item name="android:textColor">@color/ocean_text</item>
+        <item name="android:textSize">30sp</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:fontFamily">sans-serif-medium</item>
+
+        <item name="rippleColor">@color/ocean_primary</item>
+
+        <!-- Remove default stroke overlay since we use custom background shape -->
+        <item name="strokeWidth">0dp</item>
+
+        <!-- Reduce extra padding so glyphs look centered -->
+        <item name="android:paddingLeft">0dp</item>
+        <item name="android:paddingRight">0dp</item>
+        <item name="android:paddingTop">0dp</item>
+        <item name="android:paddingBottom">0dp</item>
+    </style>
+
+    <style name="Widget.Ocean.Fab" parent="Widget.MaterialComponents.FloatingActionButton">
+        <item name="backgroundTint">@color/ocean_secondary</item>
+        <item name="tint">@color/ocean_text</item>
     </style>
 </resources>

@@ -1,13 +1,31 @@
 <resources>
     <string name="app_name">Tic Tac Toe</string>
     <string name="title_tic_tac_toe">Tic Tac Toe</string>
+
     <string name="action_reset">Reset</string>
+    <string name="action_new_game">New game</string>
+    <string name="action_reset_scores">Reset scores</string>
+    <string name="action_about">About</string>
+
+    <string name="drawer_subtitle">Ocean Professional • Material</string>
 
     <string name="status_turn">Turn: %1$s</string>
+    <string name="status_game_over">Game over</string>
+
     <string name="player_x">X</string>
     <string name="player_o">O</string>
+
+    <string name="score_x_default">X: 0</string>
+    <string name="score_o_default">O: 0</string>
+    <string name="score_draw_default">Draws: 0</string>
+    <string name="score_x">X: %1$d</string>
+    <string name="score_o">O: %1$d</string>
+    <string name="score_draws">Draws: %1$d</string>
 
     <string name="result_x_wins">X wins!</string>
     <string name="result_o_wins">O wins!</string>
     <string name="result_draw">It\'s a draw!</string>
+
+    <string name="cell_content_description">Cell %1$d, %2$s</string>
+    <string name="cell_state_empty">empty</string>
 </resources>

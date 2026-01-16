@@ -16,6 +16,11 @@ internal class TicTacToeState {
         private const val KEY_TURN = "ttt_turn" // "X" or "O"
         private const val KEY_GAME_OVER = "ttt_game_over" // Boolean
         private const val KEY_WIN_LINE = "ttt_win_line" // IntArray
+
+        // Score persistence
+        private const val KEY_SCORE_X = "ttt_score_x"
+        private const val KEY_SCORE_O = "ttt_score_o"
+        private const val KEY_SCORE_DRAWS = "ttt_score_draws"
     }
 
     var board: CharArray = CharArray(9) { TicTacToeGame.EMPTY }
@@ -28,6 +33,15 @@ internal class TicTacToeState {
         private set
 
     var winLine: IntArray? = null
+        private set
+
+    var scoreX: Int = 0
+        private set
+
+    var scoreO: Int = 0
+        private set
+
+    var scoreDraws: Int = 0
         private set
 
     // PUBLIC_INTERFACE
@@ -43,12 +57,18 @@ internal class TicTacToeState {
         if (line != null) {
             gameOver = true
             winLine = line
-            return if (currentTurn == TicTacToeGame.X) MoveResult.XWins else MoveResult.OWins
+            if (currentTurn == TicTacToeGame.X) {
+                scoreX += 1
+                return MoveResult.XWins
+            }
+            scoreO += 1
+            return MoveResult.OWins
         }
 
         if (TicTacToeGame.isDraw(board)) {
             gameOver = true
             winLine = null
+            scoreDraws += 1
             return MoveResult.Draw
         }
 
@@ -58,11 +78,19 @@ internal class TicTacToeState {
 
     // PUBLIC_INTERFACE
     fun reset() {
-        /** Resets the game to an empty board starting with X. */
+        /** Resets the game to an empty board starting with X. Keeps scores. */
         board = CharArray(9) { TicTacToeGame.EMPTY }
         currentTurn = TicTacToeGame.X
         gameOver = false
         winLine = null
+    }
+
+    // PUBLIC_INTERFACE
+    fun resetScores() {
+        /** Resets win/draw counters. Does not clear the current board. */
+        scoreX = 0
+        scoreO = 0
+        scoreDraws = 0
     }
 
     // PUBLIC_INTERFACE
@@ -72,6 +100,10 @@ internal class TicTacToeState {
         outState.putString(KEY_TURN, currentTurn.toString())
         outState.putBoolean(KEY_GAME_OVER, gameOver)
         if (winLine != null) outState.putIntArray(KEY_WIN_LINE, winLine)
+
+        outState.putInt(KEY_SCORE_X, scoreX)
+        outState.putInt(KEY_SCORE_O, scoreO)
+        outState.putInt(KEY_SCORE_DRAWS, scoreDraws)
     }
 
     // PUBLIC_INTERFACE
@@ -87,5 +119,9 @@ internal class TicTacToeState {
 
         gameOver = state.getBoolean(KEY_GAME_OVER, false)
         winLine = state.getIntArray(KEY_WIN_LINE)
+
+        scoreX = state.getInt(KEY_SCORE_X, 0)
+        scoreO = state.getInt(KEY_SCORE_O, 0)
+        scoreDraws = state.getInt(KEY_SCORE_DRAWS, 0)
     }
 }
