@@ -14,9 +14,9 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@color/ocean_surface"
+        app:elevation="2dp"
         app:title="@string/title_tic_tac_toe"
-        app:titleTextColor="@color/ocean_text"
-        app:elevation="2dp" />
+        app:titleTextColor="@color/ocean_text" />
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/content"
@@ -29,179 +29,226 @@
             android:id="@+id/statusText"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:fontFamily="sans-serif-medium"
             android:textColor="@color/ocean_text"
             android:textSize="16sp"
             android:textStyle="bold"
-            android:fontFamily="sans-serif-medium"
-            tools:text="Turn: X"
-            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="Turn: X" />
 
-        <!-- Board -->
-        <androidx.gridlayout.widget.GridLayout
-            android:id="@+id/board"
+        <!--
+          Board:
+          - Centered via constraints.
+          - Uses 3 weighted rows with 3 weighted cells each.
+          - Constrained by dimensionRatio=1:1 to stay square and scale across screens.
+        -->
+        <LinearLayout
+            android:id="@+id/boardContainer"
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:layout_marginTop="16dp"
-            app:alignmentMode="alignMargins"
-            app:columnCount="3"
-            app:rowCount="3"
-            app:useDefaultMargins="true"
-            app:layout_constraintTop_toBottomOf="@id/statusText"
+            android:baselineAligned="false"
+            android:orientation="vertical"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintDimensionRatio="1:1"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintDimensionRatio="1:1">
+            app:layout_constraintHeight_default="wrap"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/statusText"
+            app:layout_constraintWidth_default="wrap">
 
-            <!-- Row 0 -->
-            <com.google.android.material.button.MaterialButton
-                android:id="@+id/cell0"
-                style="@style/Widget.MaterialComponents.Button.OutlinedButton"
-                android:layout_width="0dp"
+            <LinearLayout
+                android:id="@+id/boardRow0"
+                android:layout_width="match_parent"
                 android:layout_height="0dp"
-                app:layout_row="0"
-                app:layout_column="0"
-                android:background="@drawable/bg_cell"
-                android:insetLeft="0dp"
-                android:insetRight="0dp"
-                android:insetTop="0dp"
-                android:insetBottom="0dp"
-                android:textColor="@color/ocean_text"
-                android:textSize="28sp"
-                app:rippleColor="@color/ocean_primary" />
+                android:layout_weight="1"
+                android:baselineAligned="false"
+                android:orientation="horizontal">
 
-            <com.google.android.material.button.MaterialButton
-                android:id="@+id/cell1"
-                style="@style/Widget.MaterialComponents.Button.OutlinedButton"
-                android:layout_width="0dp"
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/cell0"
+                    style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_margin="6dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/bg_cell"
+                    android:contentDescription="Cell 1"
+                    android:insetLeft="0dp"
+                    android:insetRight="0dp"
+                    android:insetTop="0dp"
+                    android:insetBottom="0dp"
+                    android:minHeight="64dp"
+                    android:textColor="@color/ocean_text"
+                    android:textSize="32sp"
+                    app:rippleColor="@color/ocean_primary" />
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/cell1"
+                    style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_margin="6dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/bg_cell"
+                    android:contentDescription="Cell 2"
+                    android:insetLeft="0dp"
+                    android:insetRight="0dp"
+                    android:insetTop="0dp"
+                    android:insetBottom="0dp"
+                    android:minHeight="64dp"
+                    android:textColor="@color/ocean_text"
+                    android:textSize="32sp"
+                    app:rippleColor="@color/ocean_primary" />
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/cell2"
+                    style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_margin="6dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/bg_cell"
+                    android:contentDescription="Cell 3"
+                    android:insetLeft="0dp"
+                    android:insetRight="0dp"
+                    android:insetTop="0dp"
+                    android:insetBottom="0dp"
+                    android:minHeight="64dp"
+                    android:textColor="@color/ocean_text"
+                    android:textSize="32sp"
+                    app:rippleColor="@color/ocean_primary" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/boardRow1"
+                android:layout_width="match_parent"
                 android:layout_height="0dp"
-                app:layout_row="0"
-                app:layout_column="1"
-                android:background="@drawable/bg_cell"
-                android:insetLeft="0dp"
-                android:insetRight="0dp"
-                android:insetTop="0dp"
-                android:insetBottom="0dp"
-                android:textColor="@color/ocean_text"
-                android:textSize="28sp"
-                app:rippleColor="@color/ocean_primary" />
+                android:layout_weight="1"
+                android:baselineAligned="false"
+                android:orientation="horizontal">
 
-            <com.google.android.material.button.MaterialButton
-                android:id="@+id/cell2"
-                style="@style/Widget.MaterialComponents.Button.OutlinedButton"
-                android:layout_width="0dp"
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/cell3"
+                    style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_margin="6dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/bg_cell"
+                    android:contentDescription="Cell 4"
+                    android:insetLeft="0dp"
+                    android:insetRight="0dp"
+                    android:insetTop="0dp"
+                    android:insetBottom="0dp"
+                    android:minHeight="64dp"
+                    android:textColor="@color/ocean_text"
+                    android:textSize="32sp"
+                    app:rippleColor="@color/ocean_primary" />
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/cell4"
+                    style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_margin="6dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/bg_cell"
+                    android:contentDescription="Cell 5"
+                    android:insetLeft="0dp"
+                    android:insetRight="0dp"
+                    android:insetTop="0dp"
+                    android:insetBottom="0dp"
+                    android:minHeight="64dp"
+                    android:textColor="@color/ocean_text"
+                    android:textSize="32sp"
+                    app:rippleColor="@color/ocean_primary" />
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/cell5"
+                    style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_margin="6dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/bg_cell"
+                    android:contentDescription="Cell 6"
+                    android:insetLeft="0dp"
+                    android:insetRight="0dp"
+                    android:insetTop="0dp"
+                    android:insetBottom="0dp"
+                    android:minHeight="64dp"
+                    android:textColor="@color/ocean_text"
+                    android:textSize="32sp"
+                    app:rippleColor="@color/ocean_primary" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/boardRow2"
+                android:layout_width="match_parent"
                 android:layout_height="0dp"
-                app:layout_row="0"
-                app:layout_column="2"
-                android:background="@drawable/bg_cell"
-                android:insetLeft="0dp"
-                android:insetRight="0dp"
-                android:insetTop="0dp"
-                android:insetBottom="0dp"
-                android:textColor="@color/ocean_text"
-                android:textSize="28sp"
-                app:rippleColor="@color/ocean_primary" />
+                android:layout_weight="1"
+                android:baselineAligned="false"
+                android:orientation="horizontal">
 
-            <!-- Row 1 -->
-            <com.google.android.material.button.MaterialButton
-                android:id="@+id/cell3"
-                style="@style/Widget.MaterialComponents.Button.OutlinedButton"
-                android:layout_width="0dp"
-                android:layout_height="0dp"
-                app:layout_row="1"
-                app:layout_column="0"
-                android:background="@drawable/bg_cell"
-                android:insetLeft="0dp"
-                android:insetRight="0dp"
-                android:insetTop="0dp"
-                android:insetBottom="0dp"
-                android:textColor="@color/ocean_text"
-                android:textSize="28sp"
-                app:rippleColor="@color/ocean_primary" />
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/cell6"
+                    style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_margin="6dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/bg_cell"
+                    android:contentDescription="Cell 7"
+                    android:insetLeft="0dp"
+                    android:insetRight="0dp"
+                    android:insetTop="0dp"
+                    android:insetBottom="0dp"
+                    android:minHeight="64dp"
+                    android:textColor="@color/ocean_text"
+                    android:textSize="32sp"
+                    app:rippleColor="@color/ocean_primary" />
 
-            <com.google.android.material.button.MaterialButton
-                android:id="@+id/cell4"
-                style="@style/Widget.MaterialComponents.Button.OutlinedButton"
-                android:layout_width="0dp"
-                android:layout_height="0dp"
-                app:layout_row="1"
-                app:layout_column="1"
-                android:background="@drawable/bg_cell"
-                android:insetLeft="0dp"
-                android:insetRight="0dp"
-                android:insetTop="0dp"
-                android:insetBottom="0dp"
-                android:textColor="@color/ocean_text"
-                android:textSize="28sp"
-                app:rippleColor="@color/ocean_primary" />
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/cell7"
+                    style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_margin="6dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/bg_cell"
+                    android:contentDescription="Cell 8"
+                    android:insetLeft="0dp"
+                    android:insetRight="0dp"
+                    android:insetTop="0dp"
+                    android:insetBottom="0dp"
+                    android:minHeight="64dp"
+                    android:textColor="@color/ocean_text"
+                    android:textSize="32sp"
+                    app:rippleColor="@color/ocean_primary" />
 
-            <com.google.android.material.button.MaterialButton
-                android:id="@+id/cell5"
-                style="@style/Widget.MaterialComponents.Button.OutlinedButton"
-                android:layout_width="0dp"
-                android:layout_height="0dp"
-                app:layout_row="1"
-                app:layout_column="2"
-                android:background="@drawable/bg_cell"
-                android:insetLeft="0dp"
-                android:insetRight="0dp"
-                android:insetTop="0dp"
-                android:insetBottom="0dp"
-                android:textColor="@color/ocean_text"
-                android:textSize="28sp"
-                app:rippleColor="@color/ocean_primary" />
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/cell8"
+                    style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_margin="6dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/bg_cell"
+                    android:contentDescription="Cell 9"
+                    android:insetLeft="0dp"
+                    android:insetRight="0dp"
+                    android:insetTop="0dp"
+                    android:insetBottom="0dp"
+                    android:minHeight="64dp"
+                    android:textColor="@color/ocean_text"
+                    android:textSize="32sp"
+                    app:rippleColor="@color/ocean_primary" />
+            </LinearLayout>
 
-            <!-- Row 2 -->
-            <com.google.android.material.button.MaterialButton
-                android:id="@+id/cell6"
-                style="@style/Widget.MaterialComponents.Button.OutlinedButton"
-                android:layout_width="0dp"
-                android:layout_height="0dp"
-                app:layout_row="2"
-                app:layout_column="0"
-                android:background="@drawable/bg_cell"
-                android:insetLeft="0dp"
-                android:insetRight="0dp"
-                android:insetTop="0dp"
-                android:insetBottom="0dp"
-                android:textColor="@color/ocean_text"
-                android:textSize="28sp"
-                app:rippleColor="@color/ocean_primary" />
-
-            <com.google.android.material.button.MaterialButton
-                android:id="@+id/cell7"
-                style="@style/Widget.MaterialComponents.Button.OutlinedButton"
-                android:layout_width="0dp"
-                android:layout_height="0dp"
-                app:layout_row="2"
-                app:layout_column="1"
-                android:background="@drawable/bg_cell"
-                android:insetLeft="0dp"
-                android:insetRight="0dp"
-                android:insetTop="0dp"
-                android:insetBottom="0dp"
-                android:textColor="@color/ocean_text"
-                android:textSize="28sp"
-                app:rippleColor="@color/ocean_primary" />
-
-            <com.google.android.material.button.MaterialButton
-                android:id="@+id/cell8"
-                style="@style/Widget.MaterialComponents.Button.OutlinedButton"
-                android:layout_width="0dp"
-                android:layout_height="0dp"
-                app:layout_row="2"
-                app:layout_column="2"
-                android:background="@drawable/bg_cell"
-                android:insetLeft="0dp"
-                android:insetRight="0dp"
-                android:insetTop="0dp"
-                android:insetBottom="0dp"
-                android:textColor="@color/ocean_text"
-                android:textSize="28sp"
-                app:rippleColor="@color/ocean_primary" />
-
-        </androidx.gridlayout.widget.GridLayout>
+        </LinearLayout>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -211,10 +258,10 @@
         android:layout_height="wrap_content"
         android:layout_margin="20dp"
         android:contentDescription="@string/action_reset"
+        app:backgroundTint="@color/ocean_secondary"
         app:layout_anchor="@id/content"
         app:layout_anchorGravity="bottom|end"
         app:srcCompat="@android:drawable/ic_menu_revert"
-        app:backgroundTint="@color/ocean_secondary"
         app:tint="@color/ocean_text" />
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

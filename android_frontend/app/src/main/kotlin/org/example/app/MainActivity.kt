@@ -4,6 +4,7 @@ import android.app.Activity
 import android.os.Bundle
 import android.view.View
 import android.widget.TextView
+import androidx.core.content.ContextCompat
 import com.google.android.material.button.MaterialButton
 import com.google.android.material.snackbar.Snackbar
 import org.example.app.game.TicTacToeGame
@@ -80,11 +81,26 @@ class MainActivity : Activity() {
 
         val winLine = gameState.winLine?.toSet()
 
+        val xColor = ContextCompat.getColor(this, R.color.ocean_primary)
+        val oColor = ContextCompat.getColor(this, R.color.ocean_secondary)
+        val defaultTextColor = ContextCompat.getColor(this, R.color.ocean_text)
+
         for (i in cells.indices) {
             val c = gameState.board[i]
             val btn = cells[i]
 
             btn.text = if (c == TicTacToeGame.EMPTY) "" else c.toString()
+
+            // High-contrast symbols: X in primary blue, O in amber.
+            btn.setTextColor(
+                when (c) {
+                    TicTacToeGame.X -> xColor
+                    TicTacToeGame.O -> oColor
+                    else -> defaultTextColor
+                },
+            )
+
+            // Disable re-click of filled cells. Also prevent any moves once game is over.
             btn.isEnabled = !gameState.gameOver && c == TicTacToeGame.EMPTY
 
             if (winLine != null && winLine.contains(i)) {
