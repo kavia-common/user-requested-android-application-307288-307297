@@ -16,7 +16,10 @@ class MainActivity : Activity() {
 
     private lateinit var root: View
     private lateinit var statusText: TextView
+    private lateinit var resultText: TextView
     private lateinit var cells: Array<MaterialButton>
+
+    private var currentSnackbar: Snackbar? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -28,6 +31,7 @@ class MainActivity : Activity() {
 
         root = findViewById(R.id.root)
         statusText = findViewById(R.id.statusText)
+        resultText = findViewById(R.id.resultText)
 
         cells = arrayOf(
             findViewById(R.id.cell0),
@@ -64,6 +68,7 @@ class MainActivity : Activity() {
         findViewById<View>(R.id.resetFab).setOnClickListener {
             gameState.reset()
             render()
+            currentSnackbar?.dismiss()
             Snackbar.make(root, getString(R.string.action_reset), Snackbar.LENGTH_SHORT).show()
         }
 
@@ -76,7 +81,26 @@ class MainActivity : Activity() {
     }
 
     private fun render() {
-        statusText.text = getString(R.string.status_turn, gameState.currentTurn.toString())
+        // Prominent indicator: just the player token in the pill (X or O)
+        statusText.text = gameState.currentTurn.toString()
+
+        // End-state banner: visible but non-intrusive (and avoids requiring Snackbar to read result)
+        if (gameState.gameOver) {
+            val message = when {
+                gameState.winLine != null && gameState.currentTurn == TicTacToeGame.X ->
+                    getString(R.string.result_x_wins)
+
+                gameState.winLine != null && gameState.currentTurn == TicTacToeGame.O ->
+                    getString(R.string.result_o_wins)
+
+                else -> getString(R.string.result_draw)
+            }
+            resultText.visibility = View.VISIBLE
+            resultText.text = message
+        } else {
+            resultText.visibility = View.GONE
+            resultText.text = ""
+        }
 
         val winLine = gameState.winLine?.toSet()
 
@@ -85,23 +109,37 @@ class MainActivity : Activity() {
             val btn = cells[i]
 
             btn.text = if (c == TicTacToeGame.EMPTY) "" else c.toString()
+
+            // Disable further moves once game is over, and also disable already-filled cells.
             btn.isEnabled = !gameState.gameOver && c == TicTacToeGame.EMPTY
 
+            // Visual feedback: highlight winning line.
             if (winLine != null && winLine.contains(i)) {
                 btn.setBackgroundResource(R.drawable.bg_cell_win)
             } else {
                 btn.setBackgroundResource(R.drawable.bg_cell)
             }
+
+            // Accessibility: announce as "Empty" / "X" / "O"
+            btn.contentDescription = when (c) {
+                TicTacToeGame.X -> "Cell ${i + 1}: X"
+                TicTacToeGame.O -> "Cell ${i + 1}: O"
+                else -> "Cell ${i + 1}: Empty"
+            }
         }
     }
 
     private fun showResultSnackbar(message: String) {
-        Snackbar
+        // Avoid stacking multiple snackbars.
+        currentSnackbar?.dismiss()
+
+        currentSnackbar = Snackbar
             .make(root, message, Snackbar.LENGTH_INDEFINITE)
             .setAction(getString(R.string.action_reset)) {
                 gameState.reset()
                 render()
             }
-            .show()
+
+        currentSnackbar?.show()
     }
 }

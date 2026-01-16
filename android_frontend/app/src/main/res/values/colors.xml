@@ -8,8 +8,12 @@
     <color name="ocean_background">#F9FAFB</color>
     <color name="ocean_surface">#FFFFFF</color>
     <color name="ocean_text">#111827</color>
+    <color name="ocean_text_muted">#6B7280</color>
 
     <!-- Utility -->
     <color name="ocean_outline">#E5E7EB</color>
     <color name="ocean_win_highlight">#DBEAFE</color> <!-- subtle blue highlight -->
+
+    <!-- UI accents -->
+    <color name="ocean_turn_pill_bg">#EFF6FF</color> <!-- very light blue -->
 </resources>

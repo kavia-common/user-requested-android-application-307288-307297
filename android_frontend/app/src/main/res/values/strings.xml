@@ -3,6 +3,10 @@
     <string name="title_tic_tac_toe">Tic Tac Toe</string>
     <string name="action_reset">Reset</string>
 
+    <string name="label_current_turn">Current turn</string>
+    <string name="hint_tap_to_play">Tap a square to play</string>
+    <string name="cell_content_description">Tic tac toe cell</string>
+
     <string name="status_turn">Turn: %1$s</string>
     <string name="player_x">X</string>
     <string name="player_o">O</string>
